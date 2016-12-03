@@ -1,16 +1,26 @@
-var VideoList = () => (
+var VideoList = (props) => (
+  console.log(props.videos),
   <div className="video-list media">
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
-    <VideoListEntry />
+    {props.videos.map(video =>
+      <VideoListEntry video={video} />
+    )}
   </div>
 );
+
+// class VideoList extends React.Component {
+//   construct (props) {
+//     super (props);
+//   }
+//   render () {
+//     return (
+//       <div>
+//         {props.videos.map(video =>
+//           <VideoListEntry video={video} />
+//         )}
+//       </div>
+//     );
+//   }
+// }
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
