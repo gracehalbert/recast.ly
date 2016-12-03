@@ -1,21 +1,21 @@
 var VideoList = (props) => (
   console.log(props.videos),
   <div className="video-list media">
-    {props.videos.map(video =>
-      <VideoListEntry video={video} />
+    {props.videos.map((video, index) =>
+      <VideoListEntry video={video} index={index} />
     )}
   </div>
 );
 
 // class VideoList extends React.Component {
-//   construct (props) {
+//   constructor (props) {
 //     super (props);
 //   }
 //   render () {
 //     return (
 //       <div>
 //         {props.videos.map(video =>
-//           <VideoListEntry video={video} />
+//           <VideoListEntry video={video} index={index} setNowPlaying={setNowPlaying} />
 //         )}
 //       </div>
 //     );
@@ -31,3 +31,7 @@ VideoList.propTypes = {
 // In the ES6 spec, files are "modules" and do not share a top-level scope.
 // `var` declarations will only exist globally where explicitly defined.
 window.VideoList = VideoList;
+
+
+
+// setNowPlaying={setNowPlaying}
