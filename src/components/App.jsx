@@ -22,11 +22,11 @@ class App extends React.Component {
     };
 
     this.getVideos = this.getVideos.bind(this);
-    // this.props.searchYouTube = this.props.searchYouTube.bind(this);
+    this.setNowPlaying = this.setNowPlaying.bind(this);
   }
 
   componentDidMount() {
-    this.getVideos('cats');
+    this.getVideos();
     // console.log('some shit');
 
   }
@@ -40,27 +40,30 @@ class App extends React.Component {
       this.setState({
         videoList: videos,
         nowPlaying: videos[0]
-      })
+      });
     }
     );
     // console.log('hi');
   }
+  setNowPlaying(index) {
+    this.setState ({
+      nowPlaying: this.state.videoList[index]
+    });
+  }
 
-  // setNowPlaying() {
-  //   this.setState({
-  //     nowPlaying: this.state.videos[index]
-  //   });
-  // }
+  debounce(query) {
+    _.debounce(this.getVideos.bind(this), 500)(query);
+  }
 
   render() {
     return (
       <div>
-           <Nav search={this.getVideos}/>
+           <Nav onSearch={this.debounce.bind(this)}/>
            <div className="col-md-7">
              <VideoPlayer video={this.state.nowPlaying}/>
            </div>
            <div className="col-md-5">
-             <VideoList videos={this.state.videoList}/>
+             <VideoList videos={this.state.videoList} setNowPlaying={this.setNowPlaying}/>
            </div>
          </div>
     );

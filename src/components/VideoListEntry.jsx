@@ -5,11 +5,8 @@ var VideoListEntry = (props) => (
     </div>
     <div className="media-body">
       <div className="video-list-entry-title" onClick={function() {
-                  console.log('click');
-        this.setState({
-          nowPlay: this.state.videolist[index]
-
-        }); }}>{props.video.snippet.title}</div>
+        props.setNowPlaying(props.index);
+      } }>{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
