@@ -14,33 +14,53 @@
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.setNowPlaying = this.setNowPlaying.bind(this);
+
     this.state = {
-      videolist: props.videolist,
-      nowPlaying: null
+      videoList: [],
+      nowPlaying: null,
+      key: 'AIzaSyBVtvAiN9TvtcmYie4XrNZgsJoOHd7nd_c'
     };
+
+    this.getVideos = this.getVideos.bind(this);
+    // this.props.searchYouTube = this.props.searchYouTube.bind(this);
   }
-  setNowPlaying(index) {
-    this.setState({
-      nowPlay: this.state.videolist[index]
-    });
+
+  componentDidMount() {
+    this.getVideos('cats');
+    // console.log('some shit');
+
   }
-  // getInitialState() {
-  //   this.state = {
-  //     videolist: props.videolist,
-  //     nowPlaying: null
-  //   };
+  getVideos(query) {
+    // console.log(YOUTUBE_API_KEY);
+    var options = {
+      key: this.state.key,
+      query: query || 'cats'
+    };
+    this.props.searchYouTube(options, (videos) => {
+      this.setState({
+        videoList: videos,
+        nowPlaying: videos[0]
+      })
+    }
+    );
+    // console.log('hi');
+  }
+
+  // setNowPlaying() {
+  //   this.setState({
+  //     nowPlaying: this.state.videos[index]
+  //   });
   // }
+
   render() {
-    console.log(this.props);
     return (
       <div>
-           <Nav />
+           <Nav search={this.getVideos}/>
            <div className="col-md-7">
-             <VideoPlayer video={this.state.videolist}/>
+             <VideoPlayer video={this.state.nowPlaying}/>
            </div>
            <div className="col-md-5">
-             <VideoList videos={this.state.videolist}/>
+             <VideoList videos={this.state.videoList}/>
            </div>
          </div>
     );

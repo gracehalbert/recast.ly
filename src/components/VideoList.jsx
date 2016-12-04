@@ -1,5 +1,9 @@
+// var clickHandler = function() {
+//   this.setState({
+//     nowPlay: this.state.videolist[index]
+//   });
+
 var VideoList = (props) => (
-  console.log(props.videos),
   <div className="video-list media">
     {props.videos.map((video, index) =>
       <VideoListEntry video={video} index={index} />

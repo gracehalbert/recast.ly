@@ -4,7 +4,12 @@ var VideoListEntry = (props) => (
       <img className="media-object" src={props.video.snippet.thumbnails.default.url} alt="" />
     </div>
     <div className="media-body">
-      <div className="video-list-entry-title" onClick={() => setNowPlaying(index), console.log('clicked')}>{props.video.snippet.title}</div>
+      <div className="video-list-entry-title" onClick={function() {
+                  console.log('click');
+        this.setState({
+          nowPlay: this.state.videolist[index]
+
+        }); }}>{props.video.snippet.title}</div>
       <div className="video-list-entry-detail">{props.video.snippet.description}</div>
     </div>
   </div>
